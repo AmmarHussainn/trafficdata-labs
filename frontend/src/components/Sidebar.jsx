@@ -21,7 +21,7 @@ import {
   
     return (
       <>
-        <div className='max-w-[20%] w-full  border '>
+        <div className='max-w-[20%] h-[100vh] w-full  border '>
           <div className='py-7 px-2'>
             <div className='flex px-7 py-2 gap-3  '>
               <Image src={companiesicon} alt='companiesicon' />

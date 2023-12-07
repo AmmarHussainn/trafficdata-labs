@@ -5,6 +5,7 @@ import peoplesicon from './Images/peoplesicon.png';
 import trafficdataicon from './Images/trafficdataicon.png';
 import settingicon from './Images/settingicon.png';
 import pixelicon from './Images/pixelicon.png';
+import instructioncrossicon from './Images/instructioncrossicon.png';
 export {
   tdllogo,
   billingicon,
@@ -13,4 +14,5 @@ export {
   trafficdataicon,
   settingicon,
   pixelicon,
+    instructioncrossicon
 };
