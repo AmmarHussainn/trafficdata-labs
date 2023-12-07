@@ -4,9 +4,9 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div className='flex h-14 '>
-    <Image  src={tdllogo} alt='tdlogo' className='w-[160px] h-[40px] mt-2 mx-6  mr-9 '/>
-     <div className='w-full h-full bg-primary'></div>
+    <div className='flex h-14 w-full '>
+    <Image  src={tdllogo} alt='tdlogo' className='w-[20%] h-[40px] mt-2 px-6   '/>
+     <div className='w-[80%] h-full bg-primary'></div>
     </div>
   )
 }
