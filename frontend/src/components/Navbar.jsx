@@ -4,8 +4,8 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <div className='flex h-14 w-full '>
-    <Image  src={tdllogo} alt='tdlogo' className='w-[20%] h-[40px] mt-2 px-6   '/>
+    <div className='flex h-[8vh] w-full '>
+    <Image  src={tdllogo} alt='tdlogo' className='w-[20%] h-[40px] mt-4 px-6   '/>
      <div className='w-[80%] h-full bg-primary'></div>
     </div>
   )
