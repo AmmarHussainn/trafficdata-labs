@@ -15,6 +15,7 @@ import snitcherlogo from "./Images/snitcherlogo.png";
 import jobicon from "./Images/jobicon.png";
 import  eyeicon from "./Images/eyeicon.png";
 import uslogoicon from "./Images/uslogoicon.png";
+import danger from "./Images/danger.png";
 export {
   uslogoicon,
   eyeicon,
@@ -31,6 +32,7 @@ export {
   trafficdataicon,
   settingicon,
   pixelicon,
+  danger,
   instructioncrossicon,
   wordPress,
 };

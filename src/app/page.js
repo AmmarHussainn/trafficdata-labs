@@ -6,31 +6,80 @@ import Sidebar from '@/components/Sidebar';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import CustomsModal from '@/components/CustomModal';
-import { wordPress } from '@/assets';
+import { danger, wordPress } from '@/assets';
 
 export default function Home() {
   const [selected, setSelected] = useState('All');
   const [show, setShow] = useState(false);
+
   const CustomerModal = () => {
     console.log('CustomerModal', show);
-    return (<div>
-      <div className='text-black font-inter text-xs font-bold leading-normal'>Install Deep Visitor on your site</div>
-      <div className='flex justify-between mt-[23px] text-gray-300 font-inter text-xs font-normal leading-normal border-b-[1px] pb-[2px] border-gray-300'>
-        <div className='w-1/2 flex '>
-          <div className='flex justify-center items-center gap-[5px]'><SvgIcons.Code /> Install Code</div>
-          <div className='flex ml-[30px] justify-center items-center gap-[5px]'><Image  src={wordPress} alt='tdlogo'  /> Wordpress</div>
+    const [state, setState] = useState('installCode');
+
+    return (
+      <div>
+        <div className='text-black font-inter text-xs font-bold leading-normal'>
+          Install Deep Visitor on your site
         </div>
-        <div className='w-1/2 flex justify-end gap-[5px]'><SvgIcons.Avatar /> Get Help</div>
+        <div className='flex justify-between mt-[23px] text-gray-300 font-inter text-xs font-normal leading-normal border-b-[1px] pb-[2px] border-gray-300'>
+          <div className='w-1/2 flex '>
+            <div
+              className='flex justify-center items-center gap-[5px]'
+              onClick={() => setState('installCode')}
+            >
+              <SvgIcons.Code /> Install Code
+            </div>
+            <div
+              className='flex ml-[30px] justify-center items-center gap-[5px]'
+              onClick={() => setState('Wordpress')}
+            >
+              <Image src={wordPress} alt='tdlogo' /> Wordpress
+            </div>
+          </div>
+          <div
+            className='w-1/2 flex justify-end gap-[5px]'
+            onClick={() => setState('gethelp')}
+          >
+            <SvgIcons.Avatar /> Get Help
+          </div>
+        </div>
+        <div className='mt-[12px] text-black font-inter text-xs font-normal leading-normal'>
+          {state == 'installCode'
+            ? 'Paste the code at the top of the head of every page you want to track visitors on. If you need help, reach out to our team in the chat bubble'
+            : state == 'Wordpress'
+            ? 'For WordPress, we recommend installing the Head, Footer and Post Injections plugin from Stefano Lissa. After installing and activating the plugin, navigate to the Settings -> Header and Footer in your WordPress dashboard. You’ll see a number of tabs in the plugin’s interface. Make sure to default ‘Head and Footer’ tab, then copy & pase the following code snippet. If you still cant figure it out, watch this video or go to the chat bubble'
+            : 'Schedule a meeting below with one of our technical staff for help installing on your website! <br /> Make sure you have the login for the admin page of your website'}
+        </div>
 
-      </div>
-      <div className='mt-[12px] text-black font-inter text-xs font-normal leading-normal'>Paste the code at the top of the head of every page you want to track visitors on. If you need help, reach out to our team in the chat bubble</div>
+        <div className='h-[204px] w-full border border-gray-300 bg-white mt-[30px]'></div>
 
-      <div className='h-[204px] w-full border border-gray-300 bg-white mt-[30px]'></div>
-      <div className='flex w-full justify-end mt-[6px]'>
-        <div className='text-white font-inter text-xs font-normal leading-normal rounded-md bg-green-500 p-3  cursor-pointer'>Verify Installation</div>
+        {state == 'Wordpress' && (
+          <div className='w-100 bg-yellow-200 p-4 mt-[16px]'>
+            <div className='flex items-center gap-1'>
+              <Image src={danger} alt='tdlogo' className='w-[20px] h-[20px]' />
+              <span className='text-[#953c00] font-inter text-[12px] font-bold'>
+                Dont forget to clear your cache
+              </span>
+            </div>
+
+            <div className='text-[#953c00] font-inter text-[10px] font-normal mt-[10px]'>
+              If you are using any caching plugins such as W3 Total Cache, WP
+              Rocket, WP Super Cache or similar, make sure you clear the cache
+              after installing the code snippet!
+            </div>
+          </div>
+        )}
+        {state !== 'gethelp' && (
+          <div className='flex w-full justify-end mt-[6px]'>
+            <div className='text-white font-inter text-xs font-normal leading-normal rounded-md bg-green-500 p-3  cursor-pointer'>
+              Verify Installation
+            </div>
+          </div>
+        )}
       </div>
-    </div>);
+    );
   };
+
   useEffect(() => {
     console.log('show', show);
   }, [show]);
@@ -146,6 +195,7 @@ export default function Home() {
         close={() => setShow(false)}
         width={'50%'}
         borderRadius={'12px'}
+        // component={<CustomerModal show={show} />}
         component={<CustomerModal show={show} />}
         onClose={() => setShow(false)}
       />
