@@ -13,13 +13,57 @@ import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import CustomModal from '@/components/CustomModal';
+import SvgIcons from '@/assets/SvgIcons';
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState('timeline');
-
+  const [showModel, setShowModel] = useState(true);
+  const [show, setShow] = useState(false);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
     // Add any additional functionality you want to execute when a tab is clicked
+  };
+
+  const CustomerModal = () => {
+    return (
+      <>
+        <div className=' container max-w-[650px] w-full '>
+          <div className='flex justify-end w-full '>
+            <SvgIcons.Close />
+          </div>
+          <h2 className='text-3xl font-bold'>Jack Caspino</h2>
+          <div className='flex justify-start gap-4 items-start mt-2 border-b-2 py-6'>
+            <button
+              onClick={() => handleTabClick('timeline')}
+             className='bg-primary text-black px-2 py-[2px] text-sm border rounded-2xl'
+            >
+              Contact Details
+            </button>
+            <button
+              onClick={() => handleTabClick('timeline')}
+             className='bg-primary text-black px-2 py-[2px] text-sm border rounded-2xl'
+            >
+              Contact Details
+            </button>
+            <button
+              onClick={() => handleTabClick('timeline')}
+             className='bg-primary text-black px-2 py-[2px] text-sm border rounded-2xl'
+            >
+              Contact Details
+            </button>
+          </div>
+
+          <div className='max-w-[400px] py-5 px-10 w-full'>
+           <div className='flex gap-20'>
+            <p>Email</p>
+            <p>jcaspino@gmail.com</p>
+           </div>
+            
+          </div>
+        </div>
+      </>
+    );
   };
 
   return (
@@ -74,7 +118,9 @@ const Page = () => {
                 <button
                   onClick={() => handleTabClick('timeline')}
                   className={`text-black ${
-                    activeTab === 'timeline' ? 'bg-primary , text-white'  : 'bg-white , text-black'
+                    activeTab === 'timeline'
+                      ? 'bg-primary , text-white'
+                      : 'bg-white , text-black'
                   } px-1 text-sm rounded-xl border`}
                 >
                   Timeline
@@ -82,46 +128,54 @@ const Page = () => {
                 <button
                   onClick={() => handleTabClick('contact')}
                   className={`text-black ${
-                    activeTab === 'contact' ? 'bg-primary , text-white'  : 'bg-white , text-black'
+                    activeTab === 'contact'
+                      ? 'bg-primary , text-white'
+                      : 'bg-white , text-black'
                   } px-1 text-sm rounded-xl border`}
-                  
                 >
                   Contact
                 </button>
               </div>
 
               <div className=' max-w-[600px] w-full mx-3 my-4 bg-[#F6F6F6] border border-solid p-5 px-3'>
-             
-              <div className='flex gap-2 max-w-[570px] justify-between items-center px-2 py-2 bg-white w-full '>
-               <div className='flex gap-2 items-center'>
-                <p className='text-4xl'>18</p>
-                 <div>
-                  <p>Thursday</p>
-                  <p>September, 2023</p>
-                 </div>
-               </div>
-               <div>
+                <div className='flex gap-2 max-w-[570px] justify-between items-center px-2 py-2 bg-white w-full '>
+                  <div className='flex gap-2 items-center'>
+                    <p className='text-4xl'>18</p>
+                    <div>
+                      <p>Thursday</p>
+                      <p>September, 2023</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p>7:24 PM</p>
+                  </div>
 
-               <p>7:24 PM</p>
-               </div>
+                  <div className='flex gap-4'>
+                    <Image
+                      src={uslogoicon}
+                      alt='uslogo'
+                      className='w-[24px] h-[20px]'
+                    />
+                    <p>United States</p>
+                  </div>
 
-              <div className='flex gap-4'>
-                <Image  src={uslogoicon} alt='uslogo' className='w-[24px] h-[20px]'/>
-                <p>United States</p>
-              </div>
-              
-              <div className=' px-2 py-1 border border-solid'>
-              Jack Caspino
-              </div>
-
-              </div>
-              
-             
+                  <div className=' px-2 py-1 border border-solid'>
+                    Jack Caspino
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <CustomModal
+        open={showModel}
+        close={() => setShowModel(false)}
+        width={'50%'}
+        borderRadius={'12px'}
+        component={<CustomerModal show={show} />}
+      />
     </>
   );
 };

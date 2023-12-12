@@ -93,7 +93,7 @@ export default function Home() {
 
           <div className='flex flex-col'>
             <div className='flex justify-evenly mt-[17px] w-full'>
-              <div className='flex w-[25%] justify-between p-[13px] items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
+              <div className='flex w-[25%] justify-between  items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
                 <div className='flex gap-[7px]'>
                   <SvgIcons.Search /> Identified website viewers
                 </div>
@@ -101,7 +101,7 @@ export default function Home() {
                   0
                 </div>
               </div>
-              <div className='flex w-[25%] justify-between p-[13px] items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
+              <div className='flex w-[25%] justify-between  items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
                 <div className='flex gap-[7px]'>
                   <SvgIcons.Fire /> Hot Viewers
                 </div>
@@ -109,7 +109,7 @@ export default function Home() {
                   0
                 </div>
               </div>
-              <div className='flex w-[25%] justify-between p-[13px] items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
+              <div className='flex w-[25%] justify-between  items-center text-black font-inter text-base font-bold rounded-lg border border-gray-300 bg-white p-4'>
                 <div className='flex gap-[7px]'>
                   <SvgIcons.Calender /> Visitors Today
                 </div>
