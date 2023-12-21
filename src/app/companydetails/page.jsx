@@ -137,7 +137,7 @@ const Page = () => {
                 </button>
               </div>
 
-              <div className=' max-w-[600px] w-full mx-3 my-4 bg-[#F6F6F6] border border-solid p-5 px-3'>
+              <div className=' max-w-[600px] w-full mx-3 my-4 bg-[#F6F6F6]  border-solid  p-5 px-3'>
                 <div className='flex gap-2 max-w-[570px] justify-between items-center px-2 py-2 bg-white w-full '>
                   <div className='flex gap-2 items-center'>
                     <p className='text-4xl'>18</p>
@@ -162,6 +162,21 @@ const Page = () => {
                   <div className=' px-2 py-1 border border-solid'>
                     Jack Caspino
                   </div>
+                </div>
+
+                <div className='max-w-[500px] w-full grid grid-cols-4 text-[#979797] place-content-between place-items-center gap-3'>
+                <div className='text-[#F6F6F6] bg-[#979797] w-[95px] p-3'>
+                  <p>Chrome, Desktop</p>
+                </div>
+                <div className='text-[#F6F6F6] bg-[#979797] w-[95px] p-3'>
+                  <p>Chrome, Desktop</p>
+                </div>
+                <div className='text-[#F6F6F6] bg-[#979797] w-[95px] p-3'>
+                  <p>Chrome, Desktop</p>
+                </div>
+                <div className='text-[#F6F6F6] bg-[#979797] w-[95px] p-3'>
+                  <p>Chrome, Desktop</p>
+                </div>
                 </div>
               </div>
             </div>
