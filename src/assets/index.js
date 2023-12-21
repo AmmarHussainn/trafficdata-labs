@@ -16,7 +16,9 @@ import jobicon from "./Images/jobicon.png";
 import  eyeicon from "./Images/eyeicon.png";
 import uslogoicon from "./Images/uslogoicon.png";
 import danger from "./Images/danger.png";
+import authbanner from "./Images/authbanner.png";
 export {
+  authbanner,
   uslogoicon,
   eyeicon,
   jobicon,
