@@ -18,7 +18,7 @@ import SvgIcons from '@/assets/SvgIcons';
 import axios from 'axios';
 import Flag from 'react-flags-select';
 // import 'react-flags-select/css/react-flags-select.css';
-import { US } from 'country-flag-icons/react/3x2'
+import { US } from 'country-flag-icons/react/3x2';
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState('timeline');
@@ -71,8 +71,30 @@ const Page = () => {
         });
 
         const result = Array.from(codeMaxTimeMap.values());
-        setData(result);
-        console.log('result', result);
+
+        const groupedData = result.reduce((acc, entry, index) => {
+          const { usercode } = entry;
+          if (!acc[usercode]) {
+            acc[usercode] = [];
+          }
+          acc[usercode].push({ index, data: entry });
+          return acc;
+        }, {});
+
+        for (const key in groupedData) {
+          if (groupedData.hasOwnProperty(key)) {
+            groupedData[key].sort((a, b) => {
+              const dateA = new Date(a.data.date).getTime();
+              const dateB = new Date(b.data.date).getTime();
+              return dateA - dateB;
+            });
+          }
+        }
+        const dataArray = Object.values(groupedData).map((data) => ({
+          ...data,
+        }));
+        console.log('groupedData', dataArray);
+        setData(dataArray);
       })
       .catch((error) => {
         setError(error.message);
@@ -139,8 +161,8 @@ const Page = () => {
               <Image src={safari} alt='safari' className='w-10 h-8' />
             </div>
           </div>
-          <div className='flex '>
-            <div className='max-w-[400px] bg-[#f6f6f6db] p-4 border w-full'>
+          <div className='flex w-[100%] justify-between'>
+            <div className='w-[30%] rounded-md bg-[#f6f6f6db] p-4  '>
               <div className='flex justify-start gap-7 my-7 items-center'>
                 <Image src={snitcherlogo} alt='snitcherlog' className='w-16' />
                 <div>
@@ -166,7 +188,7 @@ const Page = () => {
                 </div>
               </div>
             </div>
-            <div>
+            <div className='w-[65%]'>
               <div className='flex gap-2 px-4'>
                 <button
                   onClick={() => handleTabClick('timeline')}
@@ -190,22 +212,33 @@ const Page = () => {
                 </button>
               </div>
 
-              <div>
+              <div className='w-[100%] bg-[#f6f6f6db] rounded-md p-[22px] mt-[22px]'>
                 {data &&
                   data.length > 0 &&
                   data.map((ele, idx) => {
                     return (
-                      <div className=' max-w-[600px] w-full mx-3 my-4 bg-white border-2  border-solid  p-5 px-3'>
-                        <div className='flex gap-2 max-w-[570px] justify-between items-center px-2 py-2 bg-white w-full '>
+                      <div className=' w-[100%]  mb-[20px] bg-white   rounded-md  p-5 px-3'>
+                        {console.log('ele', ele)}
+                        <div className='flex gap-2 w-[100%] justify-between items-center px-2 py-2 bg-white '>
                           <div className='flex gap-2 items-center'>
                             <p className='text-4xl'>
-                              {new Date(ele.date).getDate()}
+                              {new Date(ele[0].data.date).getDate()}
                             </p>
                             <div>
-                              <p>{daysOfWeek[new Date(ele.date).getDay()]}</p>
                               <p>
-                                {monthsOfYear[new Date(ele.date).getMonth()]},{' '}
-                                {new Date(ele.date).getFullYear()}
+                                {
+                                  daysOfWeek[
+                                    new Date(ele[0].data.date).getDay()
+                                  ]
+                                }
+                              </p>
+                              <p>
+                                {
+                                  monthsOfYear[
+                                    new Date(ele[0].data.date).getMonth()
+                                  ]
+                                }
+                                , {new Date(ele[0].data.date).getFullYear()}
                               </p>
                             </div>
                           </div>
@@ -216,18 +249,21 @@ const Page = () => {
                                 hour: 'numeric',
                                 minute: 'numeric',
                                 hour12: true,
-                              }).format(new Date(ele.date))}
+                              }).format(new Date(ele[0].data.date))}
                             </p>
                           </div>
 
-                          <div className='flex gap-4'>
-                            <Image
-                              src={uslogoicon}
-                              alt='uslogo'
-                              className='w-[24px] h-[20px]'
-                            />
-                           {/* <US title="United States" className="..."/> */}
-                            {/* <p>{ele.ip.country}</p> */}
+                          <div className='flex items-center gap-4'>
+                            {ele[0].data?.ip?.countryCode && (
+                              <img
+                                src={`https://flagsapi.com/${ele[0].data.ip.countryCode}/flat/24.png`}
+                                alt='uslogo'
+                                width={24}
+                                height={24}
+                                className='w-[24px] h-[20px]'
+                              />
+                            )}
+                            <p>{ele[0].data?.ip?.country}</p>
                           </div>
 
                           <div className=' px-2 py-1 border border-solid'>
@@ -235,42 +271,58 @@ const Page = () => {
                           </div>
                         </div>
 
-                        <div className='max-w-[500px] bg-white mx-auto w-full grid grid-cols-4 text-[#979797] place-content-between place-items-center gap-3'>
-                          <div className='bg-[#f7f7f7] text-[#979797]  w-[120px] p-3'>
+                        <div className='w-[80%] bg-white mx-auto  grid grid-cols-4 text-[#979797] place-content-between place-items-center gap-3'>
+                          <div className='bg-[#f7f7f7] text-[#979797]  w-[100%] rounded-md p-2'>
                             <p className='text-[10px] text-center'>Client</p>
                             <p className='text-[10px] pt-10 text-center'>
-                              Chrome, Desktop
+                              {ele[0].data?.browser}, {ele[0].data?.agent}
                             </p>
                           </div>
-                          <div className='bg-[#f7f7f7] text-[#979797]  w-[120px] p-3'>
+                          <div className='bg-[#f7f7f7] text-[#979797]  w-[100%] rounded-md p-2'>
                             <p className='text-[10px] text-center'>Referrer</p>
                             <p className='text-[10px] pt-10 text-center'>
-                              {ele?.referrer ? 'reffered' : 'direct'}
+                              {ele[0].data?.referrer ? 'reffered' : 'direct'}
                             </p>
                           </div>
-                          <div className='bg-[#f7f7f7] text-[#979797]  w-[120px] p-3'>
+                          <div className='bg-[#f7f7f7] text-[#979797]  w-[100%] rounded-md p-2'>
                             <p className='text-[10px] text-center'>
                               Pages Viewed
                             </p>
-                            <p className='text-[10px] pt-10 text-center'>2</p>
+                            <p className='text-[10px] pt-10 text-center'>
+                              {Object.keys(ele).length}
+                            </p>
                           </div>
-                          <div className='bg-[#f7f7f7] text-[#979797]  w-[120px] p-3'>
+                          <div className='bg-[#f7f7f7] text-[#979797]  w-[100%] rounded-md p-2'>
                             <p className='text-[10px] text-center'>
                               Time Spent
                             </p>
                             <p className='text-[10px] pt-10 text-center'>
-                              {parseInt(ele.timeSpent / 60000)} mins
+                              {
+                               parseInt( Object.values(ele)
+                                  .map((data) => ({ ...data }))
+                                  .reduce(
+                                    (total, current) => total + current.data.timeSpent,
+                                    0
+                                  ) / (1000 * 60)) + 'mins'
+                                }
+                                
+                              
+                              {/* // 'mins' */}
                             </p>
                           </div>
                         </div>
-                        <div className='max-w-[500px] bg-white border border-[#979797] my-2 mx-auto w-full  text-black  '>
-                          <p className=' px-3 py-2 text-xl'>
-                            {ele.pageName.replace('/', '')}
-                          </p>
-                          <p className='text-[#979797] px-3'>
-                            For {ele.timeSpent / 1000} seconds
-                          </p>
-                        </div>
+                        {Object.values(ele)
+                          .map((data) => ({ ...data }))
+                          .map((newEle, id) => (
+                            <div className='w-[80%] bg-white border border-solid border-gray-300 rounded-md my-2 mx-auto   text-black  '>
+                              <p className=' px-3 py-2 text-xl'>
+                                {newEle.data.pageName == '/' ? newEle.data.domain:newEle.data.pageName.replace('/', '')}
+                              </p>
+                              <p className='text-[#979797] px-3'>
+                                For {newEle.data.timeSpent / 1000} seconds
+                              </p>
+                            </div>
+                          ))}
                       </div>
                     );
                   })}
