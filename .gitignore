@@ -10,7 +10,7 @@ thumbs.db
 target/
 
 # Ignore Gradle specific files
-build/
+
 
 # Ignore Eclipse specific files
 bin/
