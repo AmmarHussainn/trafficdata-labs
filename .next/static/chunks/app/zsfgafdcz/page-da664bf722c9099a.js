@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[340],{8590:function(e,n,t){Promise.resolve().then(t.bind(t,23))},23:function(e,n,t){"use strict";t.r(n),n.default=()=>{setTimeout(()=>{let e=localStorage.getItem("token");return console.log("Mytoken new",e),!!e},1e3)}}},function(e){e.O(0,[971,472,744],function(){return e(e.s=8590)}),_N_E=e.O()}]);
