@@ -3,9 +3,11 @@
 import { authbanner } from '@/assets';
 import SvgIcons from '@/assets/SvgIcons';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import axios from 'axios'; 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 const page = () => {
   const [email, setEmail] = useState('');
   const [businessName, setBusinessName] = useState('');
@@ -13,6 +15,15 @@ const page = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailExists, setEmailExists] = useState(false); 
   const [loginScreen ,setLoginScreen] = useState(false);
+  let router = useRouter();
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    console.log('token',token)
+    if(token){
+      router.push('/dashboard')
+    }
+
+  },[])
  
   const handleSubmitSignUp = async (event) => {
     event.preventDefault();
@@ -21,14 +32,15 @@ const page = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:8080/users/register', {
+      const response = await axios.post('http://18.227.228.50:3000/users/register', {
         email,
         businessName,
-        password,
+        password : password.toString(),
       });
       console.log('Registration successful:', response.data); 
       localStorage.setItem('token', response.data.token);    
-      localStorage.setItem('userId', response.data.data._id);    
+      localStorage.setItem('userId', response.data.data._id);  
+      router.push('/dashboard')  
     } catch (error) {
       if (error.response) {
         console.error('Registration failed:', error.response.data.message);
