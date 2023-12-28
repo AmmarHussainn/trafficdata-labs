@@ -33,6 +33,7 @@ const page = () => {
       return;
     }
     try {
+      
       const response = await axios.post('https://agile-sierra-68640-c9fe32348d22.herokuapp.com/users/register', {
         email,
         businessName,
