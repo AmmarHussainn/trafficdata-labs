@@ -1,1 +1,9 @@
-{}
+{
+  "/_not-found": "app/_not-found.js",
+  "/login/page": "app/login/page.js",
+  "/companydetails/page": "app/companydetails/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/zsfgafdcz/page": "app/zsfgafdcz/page.js",
+  "/page": "app/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}
