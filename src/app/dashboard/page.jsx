@@ -261,7 +261,7 @@ export default function Home() {
         )}
         {state !== 'gethelp' && (
           <div className='flex w-full justify-end mt-[6px]'>
-            <div onClick={()=>router.push('companydetails')} className='text-white font-inter text-xs font-normal leading-normal rounded-md bg-green-500 p-3  cursor-pointer'>
+            <div onClick={()=>router.push('/companydetails')} className='text-white font-inter text-xs font-normal leading-normal rounded-md bg-green-500 p-3  cursor-pointer'>
               Verify Installation
             </div>
           </div>
