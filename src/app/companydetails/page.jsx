@@ -55,7 +55,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const apiUrl = 'http://18.227.228.50:3000/userDetals';
+    const apiUrl = 'http://18.191.248.17:8080/userDetals';
     axios
       .get(apiUrl)
       .then((response) => {
