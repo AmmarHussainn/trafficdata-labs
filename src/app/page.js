@@ -1,4 +1,4 @@
-
+http://3.19.255.104
 'use client'
 import { authbanner } from '@/assets';
 import SvgIcons from '@/assets/SvgIcons';
@@ -32,7 +32,7 @@ const page = () => {
       return;
     }
     try {
-      const response = await axios.post('http://18.191.248.17:8080/users/register', {
+      const response = await axios.post('http://3.19.255.104:8080/users/register', {
         email,
         businessName,
         password : password.toString(),

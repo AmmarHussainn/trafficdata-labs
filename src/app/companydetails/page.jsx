@@ -1,4 +1,4 @@
-'use client';
+http://3.19.255.104'use client';
 import {
   backarrow,
   eyeicon,
@@ -55,7 +55,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const apiUrl = 'http://18.191.248.17:8080/userDetals';
+    const apiUrl = 'http://3.19.255.104:8080/userDetals';
     axios
       .get(apiUrl)
       .then((response) => {
