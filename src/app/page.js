@@ -14,6 +14,8 @@ const page = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailExists, setEmailExists] = useState(false); 
   const [loginScreen ,setLoginScreen] = useState(false);
+  const [loginEmail ,setLoginEmail] = useState('');
+  const [loginPass ,setLoginPass] = useState('');
   let router = useRouter();
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -56,6 +58,30 @@ const page = () => {
       }
     }
   };
+
+  const handleLogin = async () => {
+    if(loginEmail && loginPass){
+      try {
+        const response = await axios.post('http://3.19.255.104:8080/users/login', {
+          email : loginEmail,
+          password : loginPass.toString(),
+        });
+        localStorage.setItem('token', response.data.token);    
+        localStorage.setItem('userId', response.data.data);  
+        router.push('/dashboard')  
+      } catch (error) {
+        if (error.response) {
+          console.error('Registration failed:', error.response);
+             
+             
+        } else if (error.request) {
+          console.error('No response received from the server.');
+        } else {
+          console.error('Error in request setup:', error.message);
+        }
+      }
+    }
+  }
 
  const handleSignupClick = () => {
 
@@ -196,6 +222,8 @@ const page = () => {
             id="email"
             type="text"
             placeholder="Email"
+            value={loginEmail}
+            onInput={(e)=>setLoginEmail(e.target.value)}
           />
         </div>
         
@@ -212,6 +240,8 @@ const page = () => {
             id="password"
             type="password"
             placeholder="Password"
+            value={loginPass}
+            onInput={(e)=>setLoginPass(e.target.value)}
           />
           <div className="absolute right-5 top-9">
             <SvgIcons.Hidden className="h-6  w-6 text-gray-500" />
@@ -219,7 +249,7 @@ const page = () => {
         </div>
       
 
-         <button className='w-full bg-primary text-white py-3 rounded-md'>Login</button>
+         <button onClick={()=>handleLogin()} className='w-full bg-primary text-white py-3 rounded-md'>Login</button>
 
       
       </form> : null
