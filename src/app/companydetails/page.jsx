@@ -55,7 +55,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const apiUrl = 'http://3.19.255.104:8080/userDetals';
+    const apiUrl = 'https://agile-sierra-68640-c9fe32348d22.herokuapp.com/userDetals';
     axios
       .get(apiUrl)
       .then((response) => {

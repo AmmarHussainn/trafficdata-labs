@@ -62,7 +62,7 @@ const page = () => {
   const handleLogin = async () => {
     if(loginEmail && loginPass){
       try {
-        const response = await axios.post('http://3.19.255.104:8080/users/login', {
+        const response = await axios.post('https://agile-sierra-68640-c9fe32348d22.herokuapp.com/users/login', {
           email : loginEmail,
           password : loginPass.toString(),
         });
