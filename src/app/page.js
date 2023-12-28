@@ -1,4 +1,3 @@
-http://3.19.255.104
 'use client'
 import { authbanner } from '@/assets';
 import SvgIcons from '@/assets/SvgIcons';

@@ -1,4 +1,4 @@
-http://3.19.255.104'use client';
+'use client';
 import {
   backarrow,
   eyeicon,
